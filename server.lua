@@ -61,6 +61,25 @@ AddEventHandler("playerConnecting", function(name, skr, def) --[[ Player connect
     for _, identifer in pairs(GetPlayerIdentifiers(source)) do --[[ Loops through the players identifers ]]
         for k, v in pairs(Anti_Modders.Config.Bypass) do --[[ Loops through the players identifers ]]
             if v == identifer then
+                if Anti_Modders.Config.Log.ToConsole == true then
+                    Anti_Modders.Print(("(%s) Joined because he was in bypass (%s)"):format(name, v))
+                end
+
+                if Anti_Modders.Config.Log.ToDiscord == true then
+                    local embed = {
+                        {
+                            ["color"] = 16753920,
+                            ["title"] = "**Global Ban List**",
+                            ["description"] = ("(%s) Joined because he was in bypass (%s)"):format(name, v),
+                            ["footer"] = {
+                                ["text"] = "discord.gg/scdev",
+                            },
+                        }
+                    }
+                    PerformHttpRequest(tostring(Anti_Modders.Config.Log.Webhook), function(err,text,head) 
+                    
+                    end, 'POST', json.encode({username = "Anti Modder Webhook", embeds = embed}), { ['Content-Type'] = 'application/json' })
+                end
                 def.done()
                 return
             end
