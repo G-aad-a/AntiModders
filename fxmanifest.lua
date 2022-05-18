@@ -6,3 +6,8 @@ server_scripts {
     'config.lua',
     'server.lua'
 }
+
+
+server_exports {
+    GetMainObject()
+}

@@ -1,5 +1,5 @@
 Config = {
-    Bypass = {"steam:110000118132644"},
+    Bypass = {},
     Log = {
         ToConsole = true,
         ToDiscord = true,
@@ -7,3 +7,11 @@ Config = {
     },
     Version = 1
 }
+
+
+--[[  /**
+    /*
+    /* Author: Gaada
+    /* discord.gg/scdev
+    /*
+    */ --]]
