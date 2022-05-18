@@ -78,7 +78,7 @@ AddEventHandler("playerConnecting",
                             ["title"] = "**Global Ban List**",
                             ["description"] = ("(%s) Joined because he was in bypass (%s)"):format(
                                 name, v),
-                            ["footer"] = {["text"] = "discord.gg/scdev"}
+                            ["footer"] = {["text"] = "https://antimodders.gaada.vip"}
                         }
                     }
                     PerformHttpRequest(
@@ -110,7 +110,7 @@ AddEventHandler("playerConnecting",
                             ["title"] = "**Global Ban List**",
                             ["description"] = ("(%s) Did not join because he was banned by our global ban list"):format(
                                 name),
-                            ["footer"] = {["text"] = "discord.gg/scdev"}
+                            ["footer"] = {["text"] = "https://antimodders.gaada.vip"}
                         }
                     }
                     PerformHttpRequest(
