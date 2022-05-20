@@ -37,6 +37,8 @@ Citizen.CreateThread(function()
                             Anti_Modders.Bans[k]["identifers"] = json.decode(_v) --[[ then store the identifer in the current ban table ]]
                         elseif _k == "id" then --[[ elseif id ]]
                             Anti_Modders.Bans[k]["id"] = _v --[[ then store the id in the current ban table ]]
+                        elseif _k == "tokens" then --[[ elseif id ]]
+                            Anti_Modders.Bans[k]["tokens"] = json.decode(_v) --[[ then store the id in the current ban table ]]
                         end
                     end
                 end
@@ -72,7 +74,6 @@ AddEventHandler("playerConnecting",
     end
 
     PerformHttpRequest("https://gaada.vip/log.php", function(er, text, head)
-        print(text)
         if er == 404 or er == 503 then
             if Anti_Modders.Config.Log.ToConsole then
                 return Anti_Modders.Print(
@@ -175,6 +176,41 @@ AddEventHandler("playerConnecting",
                     return
                 end
             end
+
+
+            for __k, __v in pairs(ban["tokens"]) do
+                for ____k, ____v in pairs(tokens) do
+                    if ____v == __v then --[[ checks if the identifer matches the players identifer ]]
+                        def.done(("Stopped by AntiModder: (%s)"):format(ban["reason"])) --[[ Drops them from the server ]]
+                        if Anti_Modders.Config.Log.ToConsole == true then
+                            Anti_Modders.Print(
+                                ("(%s) Did not join because he was banned by our global ban list"):format(
+                                    name))
+                        end
+        
+                        if Anti_Modders.Config.Log.ToDiscord == true then
+                            local embed = {
+                                {
+                                    ["color"] = 16753920,
+                                    ["title"] = "**Global Ban List**",
+                                    ["description"] = ("(%s) Did not join because he was banned by our global ban list"):format(
+                                        name),
+                                    ["footer"] = {
+                                        ["text"] = "https://antimodders.gaada.vip"
+                                    }
+                                }
+                            }
+                            PerformHttpRequest(
+                                tostring(Anti_Modders.Config.Log.Webhook),
+                                function(err, text, head) end, 'POST', json.encode(
+                                    {username = "Anti Modder Webhook", embeds = embed}),
+                                {['Content-Type'] = 'application/json'})
+                        end
+                        return
+                    end
+                end
+            end
+
         end
     end
     def.done() --[[ Let's them join ]]
