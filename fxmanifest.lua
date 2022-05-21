@@ -9,5 +9,5 @@ server_scripts {
 
 
 server_exports {
-    GetMainObject()
+    'GetMainObject'
 }
