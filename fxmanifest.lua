@@ -8,6 +8,4 @@ server_scripts {
 }
 
 
-server_exports {
-    'GetMainObject'
-}
+server_export 'GetMainObject'
